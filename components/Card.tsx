@@ -1,4 +1,4 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Box, BoxProps, Text, TextProps } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
@@ -20,7 +20,7 @@ function Card({ children, to }: ICard) {
       cursor="pointer"
       onClick={() => router.push(to)}
       whileHover={{
-        translateY: -10,
+        translateY: -5,
         scale: 1.02,
       }}
     >

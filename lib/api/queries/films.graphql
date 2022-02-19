@@ -17,14 +17,36 @@ query filmDetails($id: ID!) {
     title
     director
     openingCrawl
+    episodeID
     releaseDate
     speciesConnection {
       edges {
         node {
           id
-          homeworld {
-            name
-          }
+          name
+        }
+      }
+    }
+    characterConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    planetConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    starshipConnection {
+      edges {
+        node {
+          id
           name
         }
       }

@@ -1313,7 +1313,7 @@ export type FilmDetailsQueryVariables = Exact<{
 }>;
 
 
-export type FilmDetailsQuery = { __typename?: 'Root', film?: { __typename?: 'Film', id: string, title?: string | null, director?: string | null, openingCrawl?: string | null, releaseDate?: string | null, speciesConnection?: { __typename?: 'FilmSpeciesConnection', edges?: Array<{ __typename?: 'FilmSpeciesEdge', node?: { __typename?: 'Species', id: string, name?: string | null, homeworld?: { __typename?: 'Planet', name?: string | null } | null } | null } | null> | null } | null } | null };
+export type FilmDetailsQuery = { __typename?: 'Root', film?: { __typename?: 'Film', id: string, title?: string | null, director?: string | null, openingCrawl?: string | null, episodeID?: number | null, releaseDate?: string | null, speciesConnection?: { __typename?: 'FilmSpeciesConnection', edges?: Array<{ __typename?: 'FilmSpeciesEdge', node?: { __typename?: 'Species', id: string, name?: string | null } | null } | null> | null } | null, characterConnection?: { __typename?: 'FilmCharactersConnection', edges?: Array<{ __typename?: 'FilmCharactersEdge', node?: { __typename?: 'Person', id: string, name?: string | null } | null } | null> | null } | null, planetConnection?: { __typename?: 'FilmPlanetsConnection', edges?: Array<{ __typename?: 'FilmPlanetsEdge', node?: { __typename?: 'Planet', id: string, name?: string | null } | null } | null> | null } | null, starshipConnection?: { __typename?: 'FilmStarshipsConnection', edges?: Array<{ __typename?: 'FilmStarshipsEdge', node?: { __typename?: 'Starship', id: string, name?: string | null } | null } | null> | null } | null } | null };
 
 
 export const FilmsListDocument = gql`
@@ -1341,14 +1341,36 @@ export const FilmDetailsDocument = gql`
     title
     director
     openingCrawl
+    episodeID
     releaseDate
     speciesConnection {
       edges {
         node {
           id
-          homeworld {
-            name
-          }
+          name
+        }
+      }
+    }
+    characterConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    planetConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    starshipConnection {
+      edges {
+        node {
+          id
           name
         }
       }

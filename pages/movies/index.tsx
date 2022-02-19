@@ -23,7 +23,7 @@ function MoviesList() {
                 </Text>
                 <Text fontSize="xs">{film?.node?.releaseDate}</Text>
               </Box>
-              <Text fontSize="sm" lineHeight={1.5}>
+              <Text fontSize="sm" lineHeight={1.5} noOfLines={3}>
                 {film?.node?.openingCrawl}
               </Text>
             </Card>
