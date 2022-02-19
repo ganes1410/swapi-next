@@ -1,7 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useFilmsListQuery } from "../lib/generated/graphql";
 
 const Home: NextPage = () => {
+  const [result] = useFilmsListQuery();
+
+  if (result.fetching) return <p>Loading</p>;
+  if (result.error) return <p>Error</p>;
+
   return (
     <div>
       <Head>
@@ -9,7 +15,11 @@ const Home: NextPage = () => {
         <meta name="description" content="An App built with swapi api" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Home</h1>
+      {result.data?.allFilms?.edges?.map((film) => (
+        <div key={film?.node?.id}>
+          <p>{film?.node?.openingCrawl}</p>
+        </div>
+      ))}
     </div>
   );
 };

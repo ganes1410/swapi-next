@@ -1,0 +1,32 @@
+query filmsList {
+  allFilms {
+    edges {
+      node {
+        id
+        director
+        openingCrawl
+      }
+    }
+  }
+}
+
+query filmDetails($id: ID!) {
+  film(id: $id) {
+    id
+    title
+    director
+    openingCrawl
+    releaseDate
+    speciesConnection {
+      edges {
+        node {
+          id
+          homeworld {
+            name
+          }
+          name
+        }
+      }
+    }
+  }
+}

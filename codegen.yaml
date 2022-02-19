@@ -1,0 +1,10 @@
+schema: https://swapi-graphql.netlify.app/.netlify/functions/index
+documents: "./lib/api/queries/*.graphql"
+generates:
+  ./lib/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql
+    config:
+      withHooks: true
