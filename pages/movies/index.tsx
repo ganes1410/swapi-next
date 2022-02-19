@@ -1,6 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import Card from "../../components/Card";
 import MainPageLayout from "../../components/layouts/MainPageLayout";
-import SwapiTabs from "../../components/SwapiTabs";
 import { useFilmsListQuery } from "../../lib/generated/graphql";
 
 function MoviesList() {
@@ -11,13 +11,21 @@ function MoviesList() {
 
   return (
     <MainPageLayout>
-      <Box>
+      <SimpleGrid columns={[1, 2]} gap={8}>
         {result.data?.allFilms?.edges?.map((film) => (
-          <Box key={film?.node?.id} mt="2">
-            <p>{film?.node?.openingCrawl}</p>
-          </Box>
+          <Card key={film?.node?.id} to={`/movies/${film?.node?.id}`}>
+            <Box mb="4">
+              <Text fontSize="larger" fontWeight="bold">
+                {film?.node?.title}
+              </Text>
+              <Text fontSize="xs">{film?.node?.releaseDate}</Text>
+            </Box>
+            <Text fontSize="sm" lineHeight={1.5}>
+              {film?.node?.openingCrawl}
+            </Text>
+          </Card>
         ))}
-      </Box>
+      </SimpleGrid>
     </MainPageLayout>
   );
 }

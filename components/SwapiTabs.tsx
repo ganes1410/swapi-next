@@ -1,4 +1,4 @@
-import { Tabs, Tab, TabList } from "@chakra-ui/react";
+import { Tabs, Tab, TabList, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 const tabs = [
@@ -14,20 +14,22 @@ function SwapiTabs() {
     tabs.findIndex((tabItem) => router.route.includes(tabItem.key)) ?? 0;
 
   return (
-    <Tabs variant="soft-rounded" isFitted isManual index={currentIndex}>
-      <TabList>
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.key}
-            onClick={() => {
-              router.push(tab.key);
-            }}
-          >
-            {tab.label}
-          </Tab>
-        ))}
-      </TabList>
-    </Tabs>
+    <Box mb="10">
+      <Tabs variant="soft-rounded" isFitted isManual index={currentIndex}>
+        <TabList>
+          {tabs.map((tab) => (
+            <Tab
+              key={tab.key}
+              onClick={() => {
+                router.push(tab.key);
+              }}
+            >
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+      </Tabs>
+    </Box>
   );
 }
 

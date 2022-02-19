@@ -1306,7 +1306,7 @@ export type VehiclesEdge = {
 export type FilmsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FilmsListQuery = { __typename?: 'Root', allFilms?: { __typename?: 'FilmsConnection', edges?: Array<{ __typename?: 'FilmsEdge', node?: { __typename?: 'Film', id: string, director?: string | null, openingCrawl?: string | null } | null } | null> | null } | null };
+export type FilmsListQuery = { __typename?: 'Root', allFilms?: { __typename?: 'FilmsConnection', edges?: Array<{ __typename?: 'FilmsEdge', node?: { __typename?: 'Film', id: string, title?: string | null, releaseDate?: string | null, openingCrawl?: string | null } | null } | null> | null } | null };
 
 export type FilmDetailsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1322,7 +1322,8 @@ export const FilmsListDocument = gql`
     edges {
       node {
         id
-        director
+        title
+        releaseDate
         openingCrawl
       }
     }

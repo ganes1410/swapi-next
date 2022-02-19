@@ -3,7 +3,8 @@ query filmsList {
     edges {
       node {
         id
-        director
+        title
+        releaseDate
         openingCrawl
       }
     }

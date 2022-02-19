@@ -4,12 +4,13 @@ import SwapiTabs from "../SwapiTabs";
 
 interface IMainPageLayout {
   children: React.ReactNode;
+  shouldShowTabs?: boolean;
 }
 
-function MainPageLayout({ children }: IMainPageLayout) {
+function MainPageLayout({ children, shouldShowTabs = true }: IMainPageLayout) {
   return (
-    <Container maxW="container.lg" mt="20">
-      <SwapiTabs />
+    <Container maxW="container.lg" my="20">
+      {shouldShowTabs ? <SwapiTabs /> : null}
       {children}
     </Container>
   );
