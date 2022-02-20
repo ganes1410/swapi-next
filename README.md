@@ -49,11 +49,12 @@ yarn start
 - Pagination of Planets Listing to fetch only 12 items at a time.
 - The above features are also completed on the mobile app except the pagination part.
 
-## Known issues
+## Known issues / Pending Tasks
 
 - The Cached Pagination data of Planets Listing does not persist across mutliple routes.
   This happens because the react state does not know about the cached data on initial load.
   Could not find a solution for this in time.
+- Could not add tests for the app. 
 
 ## Packages / Frameworks Used
 
