@@ -5,6 +5,7 @@ import Detail from "../../components/Detail";
 import DetailCard from "../../components/DetailCard";
 import MainPageLayout from "../../components/layouts/MainPageLayout";
 import { usePeopleDetailsQuery } from "../../lib/generated/graphql";
+import { isEmpty } from "lodash";
 
 function PersonDetails() {
   const router = useRouter();
@@ -14,17 +15,6 @@ function PersonDetails() {
   });
 
   const personDetails = result?.data?.person;
-
-  /**
-   *
-   * TODO: this type needs to be dynamically calculated
-   */
-  function checkEmpty(arr: any): boolean {
-    if (arr) {
-      return arr.length > 0;
-    }
-    return true;
-  }
 
   return (
     <MainPageLayout shouldShowTabs={false}>
@@ -68,7 +58,7 @@ function PersonDetails() {
 
             <Detail heading="Vehicles" type="list">
               <Flex flexWrap="wrap" columnGap={4} rowGap={1}>
-                {checkEmpty(personDetails?.vehicleConnection?.edges) ? (
+                {!isEmpty(personDetails?.vehicleConnection?.edges) ? (
                   personDetails?.vehicleConnection?.edges?.map((vehicle) => (
                     <Text key={vehicle?.node?.id}>{vehicle?.node?.name}</Text>
                   ))
@@ -80,7 +70,7 @@ function PersonDetails() {
 
             <Detail heading="Starships" type="list">
               <Flex flexWrap="wrap" columnGap={4} rowGap={1}>
-                {checkEmpty(personDetails?.starshipConnection?.edges) ? (
+                {!isEmpty(personDetails?.starshipConnection?.edges) ? (
                   personDetails?.starshipConnection?.edges?.map((startship) => (
                     <Text key={startship?.node?.id}>
                       {startship?.node?.name}

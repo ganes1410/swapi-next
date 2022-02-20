@@ -1,6 +1,12 @@
-query peopleList {
-  allPeople {
+query peopleList($first: Int, $after: String) {
+  allPeople(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
     edges {
+      __typename
+      cursor
       node {
         id
         name

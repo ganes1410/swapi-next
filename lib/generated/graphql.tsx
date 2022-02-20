@@ -1315,10 +1315,13 @@ export type FilmDetailsQueryVariables = Exact<{
 
 export type FilmDetailsQuery = { __typename?: 'Root', film?: { __typename?: 'Film', id: string, title?: string | null, director?: string | null, openingCrawl?: string | null, episodeID?: number | null, releaseDate?: string | null, speciesConnection?: { __typename?: 'FilmSpeciesConnection', edges?: Array<{ __typename?: 'FilmSpeciesEdge', node?: { __typename?: 'Species', id: string, name?: string | null } | null } | null> | null } | null, characterConnection?: { __typename?: 'FilmCharactersConnection', edges?: Array<{ __typename?: 'FilmCharactersEdge', node?: { __typename?: 'Person', id: string, name?: string | null } | null } | null> | null } | null, planetConnection?: { __typename?: 'FilmPlanetsConnection', edges?: Array<{ __typename?: 'FilmPlanetsEdge', node?: { __typename?: 'Planet', id: string, name?: string | null } | null } | null> | null } | null, starshipConnection?: { __typename?: 'FilmStarshipsConnection', edges?: Array<{ __typename?: 'FilmStarshipsEdge', node?: { __typename?: 'Starship', id: string, name?: string | null } | null } | null> | null } | null } | null };
 
-export type PeopleListQueryVariables = Exact<{ [key: string]: never; }>;
+export type PeopleListQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+}>;
 
 
-export type PeopleListQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', edges?: Array<{ __typename?: 'PeopleEdge', node?: { __typename?: 'Person', id: string, name?: string | null, gender?: string | null, height?: number | null, birthYear?: string | null } | null } | null> | null } | null };
+export type PeopleListQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges?: Array<{ __typename: 'PeopleEdge', cursor: string, node?: { __typename?: 'Person', id: string, name?: string | null, gender?: string | null, height?: number | null, birthYear?: string | null } | null } | null> | null } | null };
 
 export type PeopleDetailsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1395,9 +1398,15 @@ export function useFilmDetailsQuery(options: Omit<Urql.UseQueryArgs<FilmDetailsQ
   return Urql.useQuery<FilmDetailsQuery>({ query: FilmDetailsDocument, ...options });
 };
 export const PeopleListDocument = gql`
-    query peopleList {
-  allPeople {
+    query peopleList($first: Int, $after: String) {
+  allPeople(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
     edges {
+      __typename
+      cursor
       node {
         id
         name
