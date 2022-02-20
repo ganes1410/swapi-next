@@ -14,10 +14,17 @@ function SwapiTabs() {
 
   return (
     <Box mb="10">
-      <Tabs variant="soft-rounded" isFitted isManual index={currentIndex}>
+      <Tabs variant="unstyled" isFitted isManual index={currentIndex} isLazy>
         <TabList>
           {tabs.map((tab) => (
             <Tab
+              _selected={{
+                color: "white",
+                bgColor: "green.400",
+                borderRadius: "50",
+                fontWeight: "bold",
+              }}
+              fontSize="xl"
               key={tab.key}
               onClick={() => {
                 router.push(tab.key);
