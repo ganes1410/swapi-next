@@ -14,7 +14,7 @@ function MoviesList() {
       {result.fetching ? (
         <AppLoader loadingText="Fetching Movies " />
       ) : (
-        <SimpleGrid columns={[1, 2]} gap={8}>
+        <SimpleGrid columns={[1, 2]} gap={4}>
           {result.data?.allFilms?.edges?.map((film) => (
             <Card key={film?.node?.id} to={`/movies/${film?.node?.id}`}>
               <Box mb="4">

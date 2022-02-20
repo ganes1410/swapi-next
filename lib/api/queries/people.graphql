@@ -6,36 +6,49 @@ query peopleList {
         name
         gender
         height
+        birthYear
       }
     }
   }
 }
 
-query peopleDetails {
-  allPeople {
-    edges {
-      node {
-        id
-        name
-        birthYear
-        gender
-        height
-        species {
-          name
-        }
-        filmConnection {
-          edges {
-            node {
-              id
-              title
-            }
-          }
-        }
-        homeworld {
-          name
-          terrains
+query peopleDetails($id: ID!) {
+  person(id: $id) {
+    id
+    name
+    birthYear
+    gender
+    height
+    species {
+      name
+    }
+    filmConnection {
+      edges {
+        node {
+          id
+          title
         }
       }
+    }
+    vehicleConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    starshipConnection {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    homeworld {
+      name
+      terrains
     }
   }
 }
