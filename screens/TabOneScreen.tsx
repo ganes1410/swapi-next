@@ -1,15 +1,23 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import EditScreenInfo from "../components/EditScreenInfo";
+import { Text, View } from "../components/Themed";
+import { RootTabScreenProps } from "../types";
+import { useFilmsListQuery } from "../../lib/generated/graphql";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+export default function TabOneScreen({
+  navigation,
+}: RootTabScreenProps<"TabOne">) {
+  const [result] = useFilmsListQuery();
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  if (result.fetching) return <Text>Loading</Text>;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      {result.data?.allFilms?.edges?.map((film) => (
+        <View key={film?.node?.id}>
+          <Text>{film?.node?.id}</Text>
+        </View>
+      ))}
+      {/* <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
     </View>
   );
 }
@@ -17,16 +25,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    alignItems: "center",
+    paddingTop: 20,
   },
 });
