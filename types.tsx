@@ -27,6 +27,11 @@ export type MovieStackParamsList = {
   MovieDetails: { movieId: string };
 };
 
+export type PeopleStackParamsList = {
+  PeopleList: undefined;
+  PeopleDetails: { peopleId: string };
+};
+
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 

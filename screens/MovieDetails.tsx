@@ -1,7 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Text } from "react-native";
 import { useFilmDetailsQuery } from "../../lib/generated/graphql";
+import DetailsCard from "../components/DetailsCard";
 import Loader from "../components/Loader";
 import { MovieStackParamsList } from "../types";
 
@@ -13,7 +14,7 @@ function MovieDetails({ route, navigation }: Props) {
     variables: { id: movieId as string },
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({ title: result?.data?.film?.title ?? "" });
   }, [navigation, result?.data?.film?.title]);
 
@@ -21,7 +22,11 @@ function MovieDetails({ route, navigation }: Props) {
 
   const filmDetails = result?.data?.film;
 
-  return <Text>{filmDetails?.title}</Text>;
+  return (
+    <DetailsCard>
+      <Text>{filmDetails?.title}</Text>
+    </DetailsCard>
+  );
 }
 
 export default MovieDetails;

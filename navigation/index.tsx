@@ -22,6 +22,7 @@ import PeopleDetails from "../screens/PeopleDetails";
 import PeopleList from "../screens/PeopleList";
 import {
   MovieStackParamsList,
+  PeopleStackParamsList,
   RootStackParamList,
   RootTabParamList,
 } from "../types";
@@ -70,7 +71,7 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 const MoviesStack = createNativeStackNavigator<MovieStackParamsList>();
-const PersonsStack = createNativeStackNavigator();
+const PersonsStack = createNativeStackNavigator<PeopleStackParamsList>();
 
 function MovieNavigator() {
   return (
@@ -92,7 +93,7 @@ function PersonNavigator() {
       <PersonsStack.Screen
         name="PeopleList"
         component={PeopleList}
-        options={{ headerShown: false }}
+        options={{ title: "Movies" }}
       />
 
       <PersonsStack.Screen name="PeopleDetails" component={PeopleDetails} />
@@ -124,6 +125,7 @@ function BottomTabNavigator() {
         name="People"
         component={PersonNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Ionicons
               size={25}
