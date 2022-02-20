@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -15,12 +15,16 @@ import * as React from "react";
 import { ColorSchemeName } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import ModalScreen from "../screens/ModalScreen";
+import MovieDetails from "../screens/MovieDetails";
+import MoviesList from "../screens/MoviesList";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import { RootStackParamList, RootTabParamList } from "../types";
-import LinkingConfiguration from "./LinkingConfiguration";
+import PeopleDetails from "../screens/PeopleDetails";
+import PeopleList from "../screens/PeopleList";
+import {
+  MovieStackParamsList,
+  RootStackParamList,
+  RootTabParamList,
+} from "../types";
 
 export default function Navigation({
   colorScheme,
@@ -29,7 +33,6 @@ export default function Navigation({
 }) {
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
@@ -56,9 +59,6 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -69,30 +69,69 @@ function RootNavigator() {
  */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
+const MoviesStack = createNativeStackNavigator<MovieStackParamsList>();
+const PersonsStack = createNativeStackNavigator();
+
+function MovieNavigator() {
+  return (
+    <MoviesStack.Navigator>
+      <MoviesStack.Screen
+        name="MoviesList"
+        component={MoviesList}
+        options={{ title: "Movies" }}
+      />
+
+      <MoviesStack.Screen name="MovieDetails" component={MovieDetails} />
+    </MoviesStack.Navigator>
+  );
+}
+
+function PersonNavigator() {
+  return (
+    <PersonsStack.Navigator>
+      <PersonsStack.Screen
+        name="PeopleList"
+        component={PeopleList}
+        options={{ headerShown: false }}
+      />
+
+      <PersonsStack.Screen name="PeopleDetails" component={PeopleDetails} />
+    </PersonsStack.Navigator>
+  );
+}
+
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Movies"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
+        name="Movies"
+        component={MovieNavigator}
         options={() => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="file-movie-o" color={color} />
+          ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="People"
+        component={PersonNavigator}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons
+              size={25}
+              name="people"
+              color={color}
+              style={{ marginBottom: -3 }}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -106,5 +145,5 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={25} style={{ marginBottom: -3 }} {...props} />;
 }
