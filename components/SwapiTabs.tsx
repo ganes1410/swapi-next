@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 const tabs = [
   { label: "Movies", key: "movies", index: 0 },
   { label: "People", key: "persons", index: 1 },
-  { label: "Planets", key: "planets", index: 2 },
 ];
 
 function SwapiTabs() {

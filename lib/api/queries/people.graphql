@@ -1,0 +1,41 @@
+query peopleList {
+  allPeople {
+    edges {
+      node {
+        id
+        name
+        gender
+        height
+      }
+    }
+  }
+}
+
+query peopleDetails {
+  allPeople {
+    edges {
+      node {
+        id
+        name
+        birthYear
+        gender
+        height
+        species {
+          name
+        }
+        filmConnection {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+        homeworld {
+          name
+          terrains
+        }
+      }
+    }
+  }
+}

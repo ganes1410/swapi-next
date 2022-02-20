@@ -1315,6 +1315,16 @@ export type FilmDetailsQueryVariables = Exact<{
 
 export type FilmDetailsQuery = { __typename?: 'Root', film?: { __typename?: 'Film', id: string, title?: string | null, director?: string | null, openingCrawl?: string | null, episodeID?: number | null, releaseDate?: string | null, speciesConnection?: { __typename?: 'FilmSpeciesConnection', edges?: Array<{ __typename?: 'FilmSpeciesEdge', node?: { __typename?: 'Species', id: string, name?: string | null } | null } | null> | null } | null, characterConnection?: { __typename?: 'FilmCharactersConnection', edges?: Array<{ __typename?: 'FilmCharactersEdge', node?: { __typename?: 'Person', id: string, name?: string | null } | null } | null> | null } | null, planetConnection?: { __typename?: 'FilmPlanetsConnection', edges?: Array<{ __typename?: 'FilmPlanetsEdge', node?: { __typename?: 'Planet', id: string, name?: string | null } | null } | null> | null } | null, starshipConnection?: { __typename?: 'FilmStarshipsConnection', edges?: Array<{ __typename?: 'FilmStarshipsEdge', node?: { __typename?: 'Starship', id: string, name?: string | null } | null } | null> | null } | null } | null };
 
+export type PeopleListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PeopleListQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', edges?: Array<{ __typename?: 'PeopleEdge', node?: { __typename?: 'Person', id: string, name?: string | null, gender?: string | null, height?: number | null } | null } | null> | null } | null };
+
+export type PeopleDetailsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PeopleDetailsQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', edges?: Array<{ __typename?: 'PeopleEdge', node?: { __typename?: 'Person', id: string, name?: string | null, birthYear?: string | null, gender?: string | null, height?: number | null, species?: { __typename?: 'Species', name?: string | null } | null, filmConnection?: { __typename?: 'PersonFilmsConnection', edges?: Array<{ __typename?: 'PersonFilmsEdge', node?: { __typename?: 'Film', id: string, title?: string | null } | null } | null> | null } | null, homeworld?: { __typename?: 'Planet', name?: string | null, terrains?: Array<string | null> | null } | null } | null } | null> | null } | null };
+
 
 export const FilmsListDocument = gql`
     query filmsList {
@@ -1381,4 +1391,56 @@ export const FilmDetailsDocument = gql`
 
 export function useFilmDetailsQuery(options: Omit<Urql.UseQueryArgs<FilmDetailsQueryVariables>, 'query'>) {
   return Urql.useQuery<FilmDetailsQuery>({ query: FilmDetailsDocument, ...options });
+};
+export const PeopleListDocument = gql`
+    query peopleList {
+  allPeople {
+    edges {
+      node {
+        id
+        name
+        gender
+        height
+      }
+    }
+  }
+}
+    `;
+
+export function usePeopleListQuery(options?: Omit<Urql.UseQueryArgs<PeopleListQueryVariables>, 'query'>) {
+  return Urql.useQuery<PeopleListQuery>({ query: PeopleListDocument, ...options });
+};
+export const PeopleDetailsDocument = gql`
+    query peopleDetails {
+  allPeople {
+    edges {
+      node {
+        id
+        name
+        birthYear
+        gender
+        height
+        species {
+          name
+        }
+        filmConnection {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+        homeworld {
+          name
+          terrains
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function usePeopleDetailsQuery(options?: Omit<Urql.UseQueryArgs<PeopleDetailsQueryVariables>, 'query'>) {
+  return Urql.useQuery<PeopleDetailsQuery>({ query: PeopleDetailsDocument, ...options });
 };

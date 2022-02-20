@@ -5,7 +5,7 @@ import React from "react";
 function DetailCard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   return (
-    <Box borderWidth={0.5} borderRadius={10} p={["6", "8"]} position="relative">
+    <Box borderWidth={1} borderRadius={10} p={["6", "8"]} position="relative">
       <Box
         cursor={"pointer"}
         onClick={router.back}
