@@ -93,7 +93,7 @@ function PersonNavigator() {
       <PersonsStack.Screen
         name="PeopleList"
         component={PeopleList}
-        options={{ title: "Movies" }}
+        options={{ title: "People" }}
       />
 
       <PersonsStack.Screen name="PeopleDetails" component={PeopleDetails} />

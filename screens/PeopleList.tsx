@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, FlatList, Text, View } from "react-native";
 import { PeopleEdge, usePeopleListQuery } from "../../lib/generated/graphql";
 import Card from "../components/Card";
+import Detail from "../components/Detail";
 import Loader from "../components/Loader";
 import { PeopleStackParamsList } from "../types";
 
@@ -22,17 +23,23 @@ function PeopleItem({
       }
     >
       <View style={styles.movieTitleContainer}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item?.name}</Text>
-        <Text style={{ fontSize: 12 }}>{item?.birthYear}</Text>
-        <Text style={{ fontSize: 12 }}>{item?.gender}</Text>
-        <Text style={{ fontSize: 12 }}>{item?.height}</Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>
+          {item?.name}
+        </Text>
+        <Detail
+          heading="Birth Year"
+          detail={item?.birthYear ?? ""}
+          direction="row"
+        />
+        <Detail heading="Gender" detail={item?.gender ?? ""} direction="row" />
+        <Detail heading="Height" detail={item?.height ?? ""} direction="row" />
       </View>
     </Card>
   );
 }
 
 function PeopleList({ navigation }: Props) {
-  const [result] = usePeopleListQuery({ variables: { first: 12 } });
+  const [result] = usePeopleListQuery({ variables: { first: 20 } });
 
   return (
     <FlatList

@@ -1,24 +1,18 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 interface IDetailsCard {
   children: React.ReactNode;
 }
 
 function DetailsCard({ children }: IDetailsCard) {
-  return <View style={styles.container}>{children}</View>;
+  return <ScrollView style={styles.container}>{children}</ScrollView>;
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    marginHorizontal: 12,
-    marginVertical: 8,
-    borderRadius: 8,
-    borderWidth: 0.5,
-    borderColor: "lightgray",
+    padding: 16,
     backgroundColor: "#fff",
-    flex: 1,
   },
 });
 
