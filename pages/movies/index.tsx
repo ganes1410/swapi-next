@@ -10,7 +10,7 @@ function MoviesList() {
   if (result.error) return <p>Error</p>;
 
   return (
-    <MainPageLayout>
+    <MainPageLayout pageTitle="Movie Details">
       {result.fetching ? (
         <AppLoader loadingText="Fetching Movies " />
       ) : (

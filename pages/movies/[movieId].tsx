@@ -16,7 +16,10 @@ function MovieDetails() {
   const filmDetails = result?.data?.film;
 
   return (
-    <MainPageLayout shouldShowTabs={false}>
+    <MainPageLayout
+      shouldShowTabs={false}
+      pageTitle={result.data?.film?.title ?? ""}
+    >
       <DetailCard>
         {result.fetching ? (
           <AppLoader loadingText="Fetching Movie Details" />

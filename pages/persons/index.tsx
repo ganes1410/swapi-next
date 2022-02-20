@@ -35,7 +35,7 @@ function PersonList() {
   }, [result]);
 
   return (
-    <MainPageLayout>
+    <MainPageLayout pageTitle="People List">
       {result.fetching && (!peopleList || peopleList?.length === 0) ? (
         <AppLoader loadingText="Fetching People" />
       ) : (

@@ -17,7 +17,10 @@ function PersonDetails() {
   const personDetails = result?.data?.person;
 
   return (
-    <MainPageLayout shouldShowTabs={false}>
+    <MainPageLayout
+      shouldShowTabs={false}
+      pageTitle={result.data?.person?.name ?? ""}
+    >
       <DetailCard>
         {result.fetching ? (
           <AppLoader loadingText="Fetching People Details" />
