@@ -36,7 +36,7 @@ function PersonList() {
 
   return (
     <MainPageLayout>
-      {result.fetching && peopleList?.length === 0 ? (
+      {result.fetching && (!peopleList || peopleList?.length === 0) ? (
         <AppLoader loadingText="Fetching People" />
       ) : (
         <SimpleGrid columns={[1, 2, 4]} gap={4}>
