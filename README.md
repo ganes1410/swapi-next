@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sayurbox - Technical Test Frontend
 
-## Getting Started
+## Web Project setup
 
-First, run the development server:
+```
+yarn install
+```
 
-```bash
-npm run dev
-# or
+### Development
+
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for Production
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+yarn build
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## React Native Project setup
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The React Native Project project is built with Expo. The code for it is under `swapi-mobile` directory.
 
-## Learn More
+```
+cd swapi-mobile
 
-To learn more about Next.js, take a look at the following resources:
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+yarn start
+```
 
-## Deploy on Vercel
+## [Live Demo]() deployed on Netlify
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features Implemented
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Listing Pages for Movies and People section separated by tabs.
+- Details Pages for individual Movies and People.
+- All the pages are cached with `DocumentCache`, so the api calls do not happen on subsequent page visits.
+- Pagination of Planets Listing to fetch only 12 items at a time.
+- The above features are also completed on the mobile app except the pagination part.
+
+## Known issues
+
+- The Cached Pagination data of Planets Listing does not persist across mutliple routes.
+  This happens because the react state does not know about the cached data on initial load.
+  Could not find a solution for this in time.
+
+## Packages / Frameworks Used
+
+- [NextJS](https://nextjs.org/) for building the react app.
+- [Expo](https://docs.expo.dev/) for building the react native app.
+- [Urql](https://formidable.com/open-source/urql/docs/) as the graphl client.
+- [Chakra UI](https://chakra-ui.com/) for styling in the react app.
+- [Graphql Code Gen](https://www.graphql-code-generator.com/) for generating graphql types and hooks needed for the project.
