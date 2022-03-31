@@ -1,9 +1,11 @@
-# Sayurbox - Technical Test Frontend
+# Swapi App
+An nextjs and react native app which shows the movie and character listings of Star Wars using the swapi Graphql api.
+
 The React Native Project(`swapi-mobile`) is part of git submodules. So when trying to clone the repo use the `--recursive` flag
 
 Example
 ```
-git clone git@github.com:ganes1410/Sayurbox-task.git --recursive
+git@github.com:ganes1410/swapi-next.git --recursive
 ```
 ## Web Project setup
 
@@ -39,7 +41,7 @@ yarn install
 yarn start
 ```
 
-## [Live Demo](https://sayurbox-task.netlify.app/) deployed on Netlify
+## [Live Demo](https://swapi-next.netlify.app/movies) deployed on Netlify
 
 ## Features Implemented
 
